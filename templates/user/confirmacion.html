@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block body %}
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <i class="bi bi-heart-pulse-fill me-2 text-warning"></i>
+      <strong class="text-warning">HAPPY PET</strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+        <li class="nav-item me-2">
+          <a class="nav-link text-warning d-flex align-items-center" href="/reservar">
+            <i class="bi bi-calendar-plus me-1"></i> Reservar cita
+          </a>
+        </li>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item me-2">
+          <a class="nav-link text-warning d-flex align-items-center" href="#">
+            <i class="bi bi-person-circle me-1"></i> {{ current_user.name }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-warning d-flex align-items-center" href="/logout">
+            <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link text-warning d-flex align-items-center" href="/login">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4">
+  <div class="card p-4 text-center">
+    <h3 class="text-success">Reserva Confirmada</h3>
+    <p>Día: <strong>{{ dia }}</strong></p>
+    <p>Fecha: <strong>{{ fecha }}</strong></p>
+    <p>Hora: <strong>{{ hora }}</strong></p>
+    <a href="/" class="btn btn-warning">Volver al inicio</a>
+  </div>
+</div>
+
+<footer class="bg-dark text-light mt-5 pt-4 pb-3">
+  <div class="container">
+    <div class="row">
+      <!-- Información -->
+      <div class="col-md-6 mb-3">
+        <h5 class="text-warning">HAPPY PET</h5>
+        <p>Clínica veterinaria especializada en el cuidado de tus mascotas.<br>
+           Dirección: Av. Siempre Viva 123, Ciudad.<br>
+           Teléfono: +51 987 654 321<br>
+           Email: info@happypet.com</p>
+      </div>
+      <!-- Redes sociales -->
+      <div class="col-md-6 mb-3">
+        <h5 class="text-warning">Síguenos</h5>
+        <a href="#" class="text-light me-3 fs-4"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-light me-3 fs-4"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-light me-3 fs-4"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-light me-3 fs-4"><i class="bi bi-youtube"></i></a>
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <small>&copy; {{ current_year }} HAPPY PET. Todos los derechos reservados.</small>
+    </div>
+  </div>
+</footer>
+
+{% endblock %}

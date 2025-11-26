@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="d-flex">
+<div class="d-flex flex-column bg-dark p-3 shadow-sm" style="width:220px; min-height:100vh;">
+  <h5 class="text-warning d-flex align-items-center mb-4">
+    <i class="bi bi-heart-pulse-fill me-2"></i> HAPPY PET
+  </h5>
+  <ul class="nav flex-column flex-grow-1">
+    <li class="nav-item mb-2">
+      <a class="nav-link d-flex align-items-center text-white" href="/admin/empleados">
+        <i class="bi bi-people-fill me-2"></i> Empleados
+      </a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link d-flex align-items-center text-white" href="/admin/reservas">
+        <i class="bi bi-calendar-event-fill me-2"></i> Reservas
+      </a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link d-flex align-items-center text-white" href="/admin/servicios">
+        <i class="bi bi-clipboard-data-fill me-2"></i> Servicios
+      </a>
+    </li>
+  </ul>
+  <div class="mt-auto">
+    <a href="/logout" class="btn btn-outline-light w-100">
+      <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+    </a>
+  </div>
+</div>
+
+
+  <div class="flex-grow-1 p-3">
+    <h3>Reservas</h3>
+    <table class="table">
+      <thead><tr><th>ID</th><th>Dueño</th><th>Mascota</th><th>Servicio</th><th>Fecha/Hora</th><th>Acciones</th></tr></thead>
+      <tbody>
+        {% for r in reservations %}
+        <tr>
+          <td>{{ r.id }}</td>
+          <td>{{ r.owner_name }}<br><small>{{ r.owner_email }}</small></td>
+          <td>{{ r.pet_name }} ({{ r.pet_type }})</td>
+          <td>{{ r.service.name if r.service else '-' }}</td>
+          <td>{{ r.reserved_at.strftime('%Y-%m-%d %H:%M') if r.reserved_at else '-' }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ r.id }}">Editar</button>
+            <div class="modal fade" id="editModal{{ r.id }}" tabindex="-1">
+              <div class="modal-dialog">
+                <form method="post" class="modal-content">
+                  <div class="modal-header"><h5>Editar reserva</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                  <div class="modal-body">
+                    <input type="hidden" name="reservation_id" value="{{ r.id }}">
+                    <div class="mb-2"><label>Fecha</label><input type="date" name="date" class="form-control" value="{{ r.reserved_at.strftime('%Y-%m-%d') if r.reserved_at else '' }}"></div>
+                    <div class="mb-2"><label>Hora</label><input type="time" name="time" class="form-control" value="{{ r.reserved_at.strftime('%H:%M') if r.reserved_at else '' }}"></div>
+                  </div>
+                  <div class="modal-footer"><button class="btn btn-primary">Guardar</button></div>
+                </form>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

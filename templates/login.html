@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body %}
+<link rel="stylesheet" href="/static/login.css">
+
+<div class="login-background">
+  <div class="login-card card p-4">
+    <h3 class="text-center text-warning fw-bold">HAPPY PET</h3>
+    <form method="post" action="/login">
+      <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <button class="btn btn-warning w-100">Ingresar</button>
+    </form>
+    <hr>
+    <form method="post" action="/guest">
+      <button class="btn btn-outline-secondary w-100">Entrar como invitado</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

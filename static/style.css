@@ -1,0 +1,6 @@
+:root{ --primary-yellow: #F6C84C; }
+body{ background: #fffdf8; }
+.navbar-brand strong{ color: var(--primary-yellow); }
+.btn-warning{ background: var(--primary-yellow); border-color: var(--primary-yellow); color:#000; }
+.bg-light{ background:#fff !important; }
+.card{ border-radius:10px; }
